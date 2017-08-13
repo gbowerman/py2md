@@ -1,6 +1,6 @@
-# py2md - Doc Converter 
+# py2md - Documentation auto-generator 
 
-## py2md.py - Simple docs generator for Python code documented to Google docstring standard.
+## py2md.py - Simple documentation generator for Python source code.
 py2md is a simple Python 3 program to automatically generate a function reference guide for a Python project, in markdown format (.md).
 
 To use py2md your project needs to meet the following requirements:
