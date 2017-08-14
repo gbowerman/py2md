@@ -65,18 +65,15 @@ def process_file(pyfile_name):
             fn_def = line[4:]
             fn_name = fn_def.split('(')[0]
             function_info = {'name': fn_name}
-            extract = extract_code('):', fn_def, pyfile_str, line_num)
-            fn_def = extract['current_str'] + ')'
-            line_num = extract['line_num']
-            function_info['definition'] = fn_def
+            extract = extract_code(':', fn_def, pyfile_str, line_num)
+            function_info['definition'] = extract['current_str']
             # process docstring
-            line_num += 1
+            line_num = extract['line_num'] +1
             doc_line = pyfile_str[line_num]
             if doc_line.startswith("    '''"):
                 comment_str = doc_line[7:]
                 extract = extract_code("'''", comment_str, pyfile_str, line_num)
-                comment_str = extract['current_str']
-                function_info['comments'] = comment_str
+                function_info['comments'] = extract['current_str']
             file_dict['functions'].append(function_info)
     return file_dict
 
