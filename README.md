@@ -40,8 +40,3 @@ The result is _py2md_, which has the following goals:
 - Table of contents with hyperlinks to each section.
 - Options links to source files.
 - Provide an HTML output option.
-
-
-
-
-
