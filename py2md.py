@@ -70,17 +70,14 @@ def process_file(pyfile_name):
             extract = extract_code('):', fn_def, pyfile_str, line_num)
             fn_def = extract['current_str'] + ')'
             line_num = extract['line_num']
-            # get rid of trailing :\n
             function_info['definition'] = fn_def
             # process docstring
             line_num += 1
             doc_line = pyfile_str[line_num]
-            print('doc_line is now: ' + doc_line)
             if doc_line.startswith("    '''"):
                 comment_str = doc_line[7:]
                 extract = extract_code("'''", comment_str, pyfile_str, line_num)
                 comment_str = extract['current_str']
-                # get rid of trailing '''\n
                 function_info['comments'] = comment_str
             file_dict['functions'].append(function_info)
     return file_dict
