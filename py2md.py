@@ -96,7 +96,8 @@ def process_output(meta_file, outfile_name):
         chapter_num = 1
         for meta_doc in meta_file['modules']:
             chapter_name = meta_doc['summary_comment']
-            doc_str += str(chapter_num) + '. [' + chapter_name + '](#' + chapter_name.replace(' ', '-') + ')\n'
+            chapter_link = chapter_name.lstrip().replace('.','').replace(' ', '-').lower()
+            doc_str += str(chapter_num) + '. [' + chapter_name + '](#' + chapter_link + ')\n'
             chapter_num += 1
 
     # Document each meta-file
