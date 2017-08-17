@@ -1,7 +1,13 @@
-# py2md - Documentation auto-generator 
+# py2md.py - Simple documentation generator for Python source code.
+py2md is a simple Python 3 program to automatically generate a function reference guide in Markdown format for a Python project..
 
-## py2md.py - Simple documentation generator for Python source code.
-py2md is a simple Python 3 program to automatically generate a function reference guide for a Python project, in markdown format (.md), with a table of contents.
+## Features
+- Creates markdown docs suitable for github README's.
+- Includes a table of contents with hyperlinks, if multiple source files.
+- Optional project name as command line argument.
+- Optionally includes links to source files.
+
+## Requirements
 
 To use py2md your project needs to meet the following requirements:
 
@@ -10,7 +16,7 @@ To use py2md your project needs to meet the following requirements:
 
 ## Usage 
 ```
-python py2md.py [-h] --sourcedir SOURCEDIR --docfile DOCFILE [--projectname PROJECTNAME]
+python py2md.py [-h] --sourcedir SOURCEDIR --docfile DOCFILE [--projectname PROJECTNAME] [--codelinks]
 
 Shortcuts: --sourcedir/-s, --docfile/-o, --projectname/-n
 ```
@@ -19,7 +25,7 @@ Shortcuts: --sourcedir/-s, --docfile/-o, --projectname/-n
 ```
 mkdir docs
 cd docs
-python .\py2md.py -s ..\azurerm -o README.md -n "azurerm - Azure REST wrappers"
+python .\py2md.py -s ..\azurerm -o README.md -n "azurerm - Azure REST wrappers" -c
 ```
 
 You can see this example in action in the _azurerm_ Github repository: [azurerm technical reference](https://github.com/gbowerman/azurerm/tree/master/docs)
@@ -37,5 +43,4 @@ The result is _py2md_, which has the following goals:
 ## Possible future enhancements
 - Improve the core file processing loops (the code is a bit messy).
 - Support static header and footer markdown files.
-- Optional links to source files.
 - Provide an HTML output option.
