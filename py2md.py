@@ -1,8 +1,7 @@
 '''py2md.py - Simple docs generator for Python code documented to Google docstring standard.'''
 import argparse
-import glob
 from time import strftime
-
+from pathlib import Path
 
 def extract_code(end_mark, current_str, str_array, line_num):
     '''Extract a multi-line string from a string array, up to a specified end marker.
@@ -54,6 +53,8 @@ def process_file(pyfile_name):
     # get file summary line at the top of the file
     if pyfile_str[0].startswith("'''"):
         file_dict['summary_comment'] = pyfile_str[0][:-1].strip("'")
+    elif pyfile_str[0].startswith('"""'):
+        file_dict['summary_comment'] = pyfile_str[0][:-1].strip('"')
     else:
         file_dict['summary_comment'] = pyfile_name
 
@@ -132,7 +133,7 @@ def main():
                             help='Source folder containing python files.')
     arg_parser.add_argument('--docfile', '-o', required=True, action='store',
                             help='Name of markdown file to write output to.')
-    arg_parser.add_argument('--projectname', '-n', required=False, action='store',
+    arg_parser.add_argument('--projectname', '-n', require`d=False, action='store',
                             help='Project name (optional, otherwise sourcedir will be used).')
     arg_parser.add_argument('--codelinks', '-c', required=False, action='store_true',
                             help='Include links to source files (optional).')
@@ -149,13 +150,13 @@ def main():
     # main document dictionary
     meta_doc = {'header': proj_name + ' Technical Reference Guide'}
     meta_doc['modules'] = []
-
-    # process each file
-    for source_file in glob.glob(source_dir + '/*.py'):
-        if '__' in source_file:
-            print('Skipping: ' + source_file)
+    
+    # process each file recursively
+    for source_file in Path(source_dir).rglob('*.py'):
+        if '__' in str(source_file):
+            print('Skipping:', source_file)
             continue
-        file_meta_doc = process_file(source_file)
+        file_meta_doc = process_file(str(source_file))
         meta_doc['modules'].append(file_meta_doc)
 
     # create output file
